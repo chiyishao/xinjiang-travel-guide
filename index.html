@@ -301,6 +301,45 @@
     font-size: 14px;
     color: var(--muted);
   }
+  
+  /* CLICK-TO-LOAD MAP BUTTON */
+  .map-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: linear-gradient(135deg, #e8e0d0, #ddd5c5);
+    transition: all 0.3s;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .map-btn:hover, .map-btn:active {
+    background: linear-gradient(135deg, #d5cdbc, #cbc3b3);
+  }
+  .map-btn .map-btn-icon {
+    font-size: 3em;
+    opacity: 0.7;
+  }
+  .map-btn .map-btn-text {
+    font-size: 14px;
+    color: #6b5e4e;
+    font-weight: 600;
+  }
+  .map-btn .map-btn-sub {
+    font-size: 11px;
+    color: #999;
+  }
+  .map-btn.loaded {
+    cursor: default;
+    background: transparent;
+    padding: 0;
+  }
+
   /* AMAP EMBED */
   .amap-embed {
     width: 100%;
@@ -563,12 +602,11 @@
 <div id="total-map">
   <div class="section-title">总行程路线地图</div>
   <div class="map-container" style="height:480px;">
-    <iframe 
-      src="https://uri.amap.com/navigation?from=75.9880,39.4683,喀什机场&to=75.9880,39.4683,喀什&via=75.2340,37.7720,塔什库尔干|82.9590,41.7220,库车|82.9750,41.7040,库车苏巴什|77.2500,38.4200,莎车|79.0700,39.8800,图木舒克&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=1"
-      allowfullscreen
-      class="amap-embed"
-      title="总行程路线"
-    ></iframe>
+    <div class="map-btn" data-src="https://uri.amap.com/navigation?from=75.9880,39.4683,喀什机场&to=75.9880,39.4683,喀什&via=75.2340,37.7720,塔什库尔干|82.9590,41.7220,库车|82.9750,41.7040,库车苏巴什|77.2500,38.4200,莎车|79.0700,39.8800,图木舒克&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=1" data-title="总行程路线">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
   </div>
   <p style="font-size:12px;color:var(--muted);margin-top:6px;text-align:center;">⬆ 高德地图路线（可交互）· 总里程约2,500公里 · 喀什为起点和终点的环线</p>
 </div>
@@ -711,7 +749,11 @@
     </div>
     <!-- D1 MAP -->
     <div class="map-container">
-      <iframe src="https://ditu.amap.com/search?query=喀什古城&query_type=RQBXY&longitude=75.9920&latitude=39.4700&range=3000" title="第1天地图-喀什" class="amap-embed" allowfullscreen></iframe>
+      <div class="map-btn" data-src="https://ditu.amap.com/search?query=喀什古城&query_type=RQBXY&longitude=75.9920&latitude=39.4700&range=3000" data-title="第1天地图-喀什">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
     </div>
     <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第1天行动区域：喀什古城核心区（高德地图）</p>
     
@@ -787,7 +829,11 @@
       <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G314国道全程，限速60-80km/h，多弯道，持续爬升</span></div>
     </div>
     <div class="map-container">
-      <iframe src="https://uri.amap.com/navigation?from=75.9880,39.4683,喀什&to=75.2340,37.7720,塔什库尔干石头城&via=75.5100,38.7900,奥依塔克|75.1200,38.3500,白沙湖|74.9000,38.4700,喀拉库勒湖&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=0" title="第2天路线地图" class="amap-embed" allowfullscreen></iframe>
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=75.9880,39.4683,喀什&to=75.2340,37.7720,塔什库尔干石头城&via=75.5100,38.7900,奥依塔克|75.1200,38.3500,白沙湖|74.9000,38.4700,喀拉库勒湖&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=0" data-title="第2天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
     </div>
     <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第2天路线：喀什 → 奥依塔克 → 白沙湖 → 喀拉库勒湖 → 塔什库尔干（G314国道）</p>
     <div class="static-map-row">
@@ -858,7 +904,11 @@
       <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G314国道返程，下山段</span></div>
     </div>
     <div class="map-container">
-      <iframe src="https://uri.amap.com/navigation?from=75.2340,37.7720,塔什库尔干&to=75.9880,39.4683,喀什&via=75.3600,37.9400,班迪尔蓝湖|75.0400,38.2700,慕士塔格冰川公园|75.5400,39.2400,乌帕尔公园&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=0" title="第3天路线地图" class="amap-embed" allowfullscreen></iframe>
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=75.2340,37.7720,塔什库尔干&to=75.9880,39.4683,喀什&via=75.3600,37.9400,班迪尔蓝湖|75.0400,38.2700,慕士塔格冰川公园|75.5400,39.2400,乌帕尔公园&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=0" data-title="第3天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
     </div>
     <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第3天路线：塔什库尔干 → 班迪尔蓝湖 → 慕士塔格冰川 → 乌帕尔双陵 → 喀什（G314国道）</p>
     <table class="schedule-table">
@@ -923,7 +973,11 @@
       <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G3012吐和高速，双向六车道，限速120km/h</span></div>
     </div>
     <div class="map-container">
-      <iframe src="https://uri.amap.com/navigation?from=75.9880,39.4683,喀什&to=80.2638,41.1677,阿克苏&via=80.3500,41.4700,温宿大峡谷&mode=car&policy=0&src=myapp&coordinate=gaode&callnative=0" title="第4天路线地图" class="amap-embed" allowfullscreen></iframe>
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=75.9880,39.4683,喀什&to=80.2638,41.1677,阿克苏&via=80.3500,41.4700,温宿大峡谷&mode=car&policy=0&src=myapp&coordinate=gaode&callnative=0" data-title="第4天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
     </div>
     <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第4天路线：喀什 → 温宿大峡谷 → 阿克苏（G3012吐和高速）</p>
     <table class="schedule-table">
@@ -977,7 +1031,11 @@
       <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G3012高速+S207省道（克孜尔段）</span></div>
     </div>
     <div class="map-container">
-      <iframe src="https://uri.amap.com/navigation?from=80.2638,41.1677,阿克苏&to=82.9590,41.7220,库车&via=82.4900,41.7900,克孜尔千佛洞|82.7300,41.7300,库木吐喇千佛洞|82.7200,41.8200,克孜尔尕哈烽燧&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=0" title="第5天路线地图" class="amap-embed" allowfullscreen></iframe>
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=80.2638,41.1677,阿克苏&to=82.9590,41.7220,库车&via=82.4900,41.7900,克孜尔千佛洞|82.7300,41.7300,库木吐喇千佛洞|82.7200,41.8200,克孜尔尕哈烽燧&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=0" data-title="第5天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
     </div>
     <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第5天路线：阿克苏 → 克孜尔石窟 → 库木吐喇石窟 → 克孜尔尕哈烽燧 → 库车</p>
     <table class="schedule-table">
@@ -1037,7 +1095,11 @@
       <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G3012吐和高速，限速120km/h</span></div>
     </div>
     <div class="map-container">
-      <iframe src="https://uri.amap.com/navigation?from=82.9590,41.7220,库车&to=78.5510,39.7920,巴楚&via=83.0700,41.7600,苏巴什佛寺遗址&mode=car&policy=0&src=myapp&coordinate=gaode&callnative=0" title="第6天路线地图" class="amap-embed" allowfullscreen></iframe>
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=82.9590,41.7220,库车&to=78.5510,39.7920,巴楚&via=83.0700,41.7600,苏巴什佛寺遗址&mode=car&policy=0&src=myapp&coordinate=gaode&callnative=0" data-title="第6天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
     </div>
     <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第6天路线：库车（龟兹博物馆群+苏巴什遗址）→ 巴楚（G3012高速西行）</p>
     <table class="schedule-table">
@@ -1102,7 +1164,11 @@
       <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G3012高速全程</span></div>
     </div>
     <div class="map-container">
-      <iframe src="https://uri.amap.com/navigation?from=78.5510,39.7920,巴楚&to=75.9880,39.4683,喀什&via=77.2500,38.4200,莎车叶尔羌汗国王陵&mode=car&policy=0&src=myapp&coordinate=gaode&callnative=0" title="第7天路线地图" class="amap-embed" allowfullscreen></iframe>
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=78.5510,39.7920,巴楚&to=75.9880,39.4683,喀什&via=77.2500,38.4200,莎车叶尔羌汗国王陵&mode=car&policy=0&src=myapp&coordinate=gaode&callnative=0" data-title="第7天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
     </div>
     <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第7天路线：巴楚 → 莎车（叶尔羌汗国遗址群）→ 喀什（G3012高速全程）</p>
     <table class="schedule-table">
@@ -1162,7 +1228,11 @@
   </div>
   <div class="day-body">
     <div class="map-container">
-      <iframe src="https://ditu.amap.com/search?query=喀什中西亚国际贸易市场&query_type=RQBXY&longitude=75.9800&latitude=39.4800&range=5000" title="第8天喀什地图" class="amap-embed" allowfullscreen></iframe>
+      <div class="map-btn" data-src="https://ditu.amap.com/search?query=喀什中西亚国际贸易市场&query_type=RQBXY&longitude=75.9800&latitude=39.4800&range=5000" data-title="第8天喀什地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
     </div>
     <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第8天行动区域：喀什市区（高德地图）</p>
     <table class="schedule-table">
@@ -1307,6 +1377,63 @@ window.addEventListener('scroll', () => {
     }
   });
 });
+
+// ===== Click-to-Load Maps (iOS Safari fix) =====
+function loadMap(placeholder) {
+  if (placeholder.classList.contains('loaded')) return;
+  
+  const src = placeholder.getAttribute('data-src');
+  if (!src) return;
+  
+  // Show loading state
+  placeholder.classList.add('loaded');
+  placeholder.style.background = '#f0ede5';
+  placeholder.innerHTML = '<div style="text-align:center;color:#999;padding-top:160px;">⏳ 地图加载中…</div>';
+  
+  // Create iframe
+  const iframe = document.createElement('iframe');
+  iframe.src = src;
+  iframe.className = 'amap-embed';
+  iframe.setAttribute('allowfullscreen', '');
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+  iframe.style.border = '0';
+  iframe.style.borderRadius = '10px';
+  iframe.loading = 'lazy';
+  
+  iframe.onload = function() {
+    placeholder.innerHTML = '';
+    placeholder.appendChild(iframe);
+  };
+  
+  iframe.onerror = function() {
+    placeholder.innerHTML = '<div style="text-align:center;color:#c0392b;padding-top:160px;">⚠️ 地图加载失败，<a href="' + src + '" target="_blank" style="color:#2980b9;">点此在新窗口打开</a></div>';
+  };
+
+  // Fallback: show after 5 seconds even if onload doesn't fire
+  setTimeout(function() {
+    if (placeholder.querySelector('.amap-embed')) return;
+    placeholder.innerHTML = '';
+    placeholder.appendChild(iframe);
+  }, 5000);
+}
+
+document.querySelectorAll('.map-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() { loadMap(btn); });
+  btn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    loadMap(btn);
+  });
+});
+
+// Auto-load first visible map after 1 second (only for overview)
+setTimeout(function() {
+  var overviewMap = document.querySelector('#total-map .map-btn');
+  if (overviewMap && !overviewMap.classList.contains('loaded') && window.innerWidth > 768) {
+    // Only auto-load on desktop; on mobile, wait for click
+  }
+}, 1000);
+
 </script>
 </body>
 </html>
