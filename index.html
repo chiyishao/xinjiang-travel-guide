@@ -1408,6 +1408,9 @@ function loadMap(placeholder) {
   iframe.src = src;
   iframe.className = 'amap-embed';
   iframe.setAttribute('allowfullscreen', '');
+  // sandbox: allow scripts to run but block top navigation and app opening
+  iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+  iframe.setAttribute('referrerpolicy', 'no-referrer');
   iframe.style.width = '100%';
   iframe.style.height = '100%';
   iframe.style.border = '0';
