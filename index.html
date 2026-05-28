@@ -2,27 +2,1451 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>测试页</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+<title>新疆南疆自驾访古攻略 · 9天8晚 · 2026年6月</title>
 <style>
-  body { font-family: -apple-system, sans-serif; padding: 40px 20px; background: #faf6ef; color: #2c1a0e; text-align: center; }
-  h1 { color: #1a5376; font-size: 1.8em; margin-bottom: 10px; }
-  .status { color: #27ae60; font-size: 1.2em; font-weight: 600; margin: 20px 0; }
-  .info { color: #7a6a5a; font-size: 14px; max-width: 400px; margin: 20px auto; line-height: 1.8; }
-  .box { background: white; border-radius: 10px; padding: 30px; max-width: 400px; margin: 0 auto; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  :root {
+    --sand: #c8a96e;
+    --rust: #a84b20;
+    --blue: #1a5376;
+    --sky: #3a98c5;
+    --green: #2d6a4f;
+    --cream: #faf6ef;
+    --light: #f3ede4;
+    --text: #2c1a0e;
+    --muted: #7a6a5a;
+    --card-bg: #fffdf8;
+    --border: #ddd0bb;
+    --accent: #e07b39;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    word-break: break-word;
+  }
+  /* NAV */
+  .top-nav {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: var(--blue);
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    overflow-x: auto;
+    height: 50px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    -webkit-overflow-scrolling: touch;
+  }
+  .top-nav a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .top-nav a:hover, .top-nav a.active {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+  }
+  /* HERO */
+  .hero {
+    background: #2a5a7c;
+    color: white;
+    padding: 60px 30px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    display: none;
+  }
+  .hero h1 {
+    font-size: 2.4em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    /* text-shadow removed for iOS */
+    position: relative;
+  }
+  .hero .subtitle {
+    font-size: 1.1em;
+    margin: 10px 0 20px;
+    color: rgba(255,255,255,0.85);
+    position: relative;
+  }
+  .hero .meta-row {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .hero .meta-item {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 13px;
+    /* backdrop-filter removed for iOS */
+  }
+  /* MAIN */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px 60px;
+  }
+  /* OVERVIEW TABLE */
+  .overview-section {
+    margin: 30px 0;
+  }
+  .section-title {
+    font-size: 1.4em;
+    color: var(--blue);
+    font-weight: 700;
+    border-left: 5px solid var(--accent);
+    padding-left: 12px;
+    margin: 30px 0 15px;
+  }
+  .overview-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .overview-table th {
+    background: var(--blue);
+    color: white;
+    padding: 10px 12px;
+    text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .overview-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: top;
+  }
+  .overview-table tr:nth-child(even) td { background: #faf5ee; }
+  .overview-table tr:hover td { background: #f0e8d8; }
+  .overview-table .day-num {
+    font-weight: 700;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  /* VALIDATION BOX */
+  .validation-section {
+    background: #fff9f0;
+    border: 1px solid #e8c89a;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 25px 0;
+  }
+  .validation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+    margin-top: 15px;
+  }
+  .validation-card {
+    background: white;
+    border-radius: 8px;
+    padding: 15px;
+    border-left: 4px solid var(--sand);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  .validation-card.ok { border-left-color: #27ae60; }
+  .validation-card.warn { border-left-color: #e67e22; }
+  .validation-card .v-title {
+    font-weight: 700;
+    font-size: 13.5px;
+    margin-bottom: 8px;
+    color: var(--blue);
+  }
+  .validation-card .v-row {
+    display: flex;
+    gap: 6px;
+    font-size: 12.5px;
+    margin: 3px 0;
+    line-height: 1.5;
+  }
+  .validation-card .v-label {
+    color: var(--muted);
+    font-weight: 600;
+    min-width: 60px;
+    flex-shrink: 0;
+  }
+  .validation-card .ok-text { color: #27ae60; font-weight: 600; }
+  .validation-card .warn-text { color: #e67e22; font-weight: 600; }
+  .validation-card .v-note {
+    margin-top: 8px;
+    padding: 7px 10px;
+    background: #f8f4ee;
+    border-radius: 5px;
+    font-size: 12px;
+    color: #555;
+    line-height: 1.55;
+  }
+  /* NAV POINT TABLE */
+  .nav-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin-top: 10px;
+  }
+  .nav-table th {
+    background: var(--rust);
+    color: white;
+    padding: 8px 10px;
+    text-align: left;
+  }
+  .nav-table td {
+    padding: 7px 10px;
+    border-bottom: 1px solid #e8ddd0;
+  }
+  .nav-table tr:nth-child(even) td { background: #fdf8f2; }
+  /* DAY SECTION */
+  .day-section {
+    margin: 40px 0;
+    background: var(--card-bg);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.09);
+  }
+  .day-header {
+    background: -webkit-linear-gradient(135deg, var(--blue), #2a6a9a);
+    background: linear-gradient(135deg, var(--blue), #2a6a9a);
+    color: white;
+    padding: 20px 25px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .day-num-badge {
+    background: rgba(255,255,255,0.2);
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+  .day-num-badge .day-zh { font-size: 10px; opacity: 0.85; }
+  .day-num-badge .day-n { font-size: 22px; line-height: 1; }
+  .day-header-info h2 {
+    font-size: 1.3em;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .day-header-info .date-text {
+    font-size: 12.5px;
+    opacity: 0.85;
+    margin-bottom: 8px;
+  }
+  .day-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .day-tag {
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 12px;
+  }
+  .day-body { padding: 25px; }
+  /* MAP CONTAINER */
+  .map-container {
+    border-radius: 10px;
+    overflow: hidden;
+    height: 380px;
+    background: #e8e0d0;
+    margin: 20px 0;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  .map-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #eee9e0;
+    color: var(--muted);
+    gap: 10px;
+  }
+  .map-placeholder .map-icon { font-size: 3em; }
+  .map-loading {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--muted);
+  }
+  
+  /* CLICK-TO-LOAD MAP BUTTON */
+  .map-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: -webkit-linear-gradient(135deg, #e8e0d0, #ddd5c5);
+    background: linear-gradient(135deg, #e8e0d0, #ddd5c5);
+    transition: all 0.3s;
+    border-radius: 10px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .map-btn:hover, .map-btn:active {
+    background: -webkit-linear-gradient(135deg, #d5cdbc, #cbc3b3);
+    background: linear-gradient(135deg, #d5cdbc, #cbc3b3);
+  }
+  .map-btn .map-btn-icon {
+    font-size: 3em;
+    opacity: 0.7;
+  }
+  .map-btn .map-btn-text {
+    font-size: 14px;
+    color: #6b5e4e;
+    font-weight: 600;
+  }
+  .map-btn .map-btn-sub {
+    font-size: 11px;
+    color: #999;
+  }
+  .map-btn.loaded {
+    cursor: default;
+    background: transparent;
+    padding: 0;
+  }
+
+  /* AMAP EMBED */
+  .amap-embed {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+  /* SCHEDULE TABLE */
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 15px 0;
+  }
+  .schedule-table th {
+    background: #e8f0f8;
+    color: var(--blue);
+    padding: 8px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .schedule-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  .schedule-table tr:last-child td { border-bottom: none; }
+  .schedule-table .time-cell {
+    white-space: nowrap;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    min-width: 100px;
+  }
+  .schedule-table .act-cell {
+    font-weight: 600;
+    color: var(--rust);
+    min-width: 120px;
+  }
+  /* SPOTS */
+  .spots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin: 15px 0;
+  }
+  .spot-card {
+    background: #fdf8f0;
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid #e8d8c0;
+    border-top: 3px solid var(--accent);
+  }
+  .spot-card .spot-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--rust);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .spot-card .spot-nav {
+    font-size: 11.5px;
+    color: var(--sky);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .spot-card .spot-nav a {
+    color: var(--sky);
+    text-decoration: none;
+  }
+  .spot-card .spot-nav a:hover { text-decoration: underline; }
+  .spot-card .spot-desc {
+    font-size: 12.5px;
+    color: #555;
+    line-height: 1.6;
+  }
+  /* TIPS BOX */
+  .tips-box {
+    background: #fff8f0;
+    border: 1px solid #f0d0a0;
+    border-left: 4px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 15px 0;
+    font-size: 13px;
+    color: #5a4030;
+    line-height: 1.65;
+  }
+  .tips-box .tips-title {
+    font-weight: 700;
+    color: var(--rust);
+    margin-bottom: 6px;
+    font-size: 13.5px;
+  }
+  /* ROUTE STRIPE */
+  .route-stripe {
+    background: linear-gradient(90deg, #eef5fa, #f9f0e6);
+    border: 1px solid #d0e4f0;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin: 15px 0;
+    font-size: 13px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .route-stripe .rs-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .route-stripe .rs-label {
+    font-weight: 600;
+    color: var(--blue);
+    font-size: 12px;
+  }
+  .route-stripe .rs-value { color: #333; }
+  /* PREP SECTION */
+  .prep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin: 15px 0;
+  }
+  .prep-card {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .prep-card .prep-title {
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prep-card ul {
+    padding-left: 16px;
+    font-size: 12.5px;
+    color: #444;
+    line-height: 1.7;
+  }
+  /* FOOTER */
+  .page-footer {
+    background: var(--blue);
+    color: rgba(255,255,255,0.75);
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    margin-top: 40px;
+  }
+  /* AMAP STATIC MAP DISPLAY */
+  .static-map-row {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+  }
+  .point-marker {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #eef5fa;
+    border: 1px solid #b8d4e8;
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--blue);
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .point-marker:hover { background: #d4e8f8; }
+  .point-marker .marker-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  /* Responsive */
+  @media (max-width: 700px) {
+    .hero h1 { font-size: 1.7em; }
+    .day-header { flex-direction: column; gap: 12px; }
+    .spots-grid { grid-template-columns: 1fr; }
+    .validation-grid { grid-template-columns: 1fr; }
+    .prep-grid { grid-template-columns: 1fr; }
+  }
+  .amap-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  .badge-wh { background: #27ae60; }
+  .badge-jd { background: #e67e22; }
+  .badge-zl { background: #2980b9; }
 </style>
 </head>
 <body>
-<div class="box">
-  <h1>🧭 新疆南疆自驾访古攻略</h1>
-  <p class="status">✅ 页面加载成功</p>
-  <div class="info">
-    <p>如果你看到这条消息，说明 GitHub Pages 连接正常。</p>
-    <p>点击下方按钮加载完整攻略。</p>
+
+<!-- TOP NAV -->
+<nav class="top-nav" id="top-nav">
+  <a href="#overview">行程概览</a>
+  <a href="#validation">路线核验</a>
+  <a href="#navpoints">导航点位</a>
+  <a href="#day1">第1天·喀什</a>
+  <a href="#day2">第2天·塔县</a>
+  <a href="#day3">第3天·冰川</a>
+  <a href="#day4">第4天·阿克苏</a>
+  <a href="#day5">第5天·库车</a>
+  <a href="#day6">第6天·巴楚</a>
+  <a href="#day7">第7天·莎车</a>
+  <a href="#day8">第8天·休整</a>
+  <a href="#day9">第9天·返程</a>
+  <a href="#prep">行前准备</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>新疆南疆自驾访古攻略</h1>
+  <p class="subtitle">9天8晚 · 丝路佛教遗址 · 古城麻扎 · 帕米尔高原 · 小众深度访古</p>
+  <div class="meta-row">
+    <div class="meta-item">📅 2026年6月12日—6月20日</div>
+    <div class="meta-item">🚗 自驾约2,500公里</div>
+    <div class="meta-item">⏱️ 驾驶约35小时（核验版）</div>
+    <div class="meta-item">🗺️ 核心线路：喀什—塔县—阿克苏—库车—巴楚—莎车—喀什</div>
   </div>
-  <p style="margin-top:30px;">
-    <a href="index_full.html" style="display:inline-block;background:#e07b39;color:white;padding:12px 30px;border-radius:25px;text-decoration:none;font-weight:600;">📖 打开完整攻略</a>
-  </p>
 </div>
+
+<div class="container">
+
+<!-- OVERVIEW -->
+<div id="overview">
+  <div class="section-title">行程概览</div>
+  <table class="overview-table">
+    <thead>
+      <tr>
+        <th>天次</th><th>日期</th><th>行程</th><th>主要访古点</th><th>住宿</th><th>驾驶（核验）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="day-num">D1</td><td>6月12日 周五</td><td>北京→喀什</td><td>博物馆·高台民居·伊斯坎德尔麻扎·古城</td><td>喀什希尔顿惠庭</td><td>飞行+约35分钟</td></tr>
+      <tr><td class="day-num">D2</td><td>6月13日 周六</td><td>喀什→塔县</td><td>奥依塔克红山·白沙湖·喀拉库勒湖·石头城</td><td>塔县美仑酒店</td><td>290公里/5.5-6h</td></tr>
+      <tr><td class="day-num">D3</td><td>6月14日 周日</td><td>塔县→喀什</td><td>班迪尔蓝湖·慕士塔格冰川·乌帕尔双陵</td><td>喀什希尔顿惠庭</td><td>398公里/7.5-8h</td></tr>
+      <tr><td class="day-num">D4</td><td>6月15日 周一</td><td>喀什→阿克苏</td><td>卡德尔王陵·温宿大峡谷</td><td>阿克苏希尔顿花园</td><td>612公里/约7h</td></tr>
+      <tr><td class="day-num">D5</td><td>6月16日 周二</td><td>阿克苏→库车</td><td>克孜尔石窟·库木吐喇石窟·克孜尔尕哈烽燧</td><td>库车希尔顿惠庭</td><td>350公里/约5h</td></tr>
+      <tr><td class="day-num">D6</td><td>6月17日 周三</td><td>库车→巴楚</td><td>龟兹博物馆·古墓博物馆·库车王府·苏巴什遗址</td><td>巴楚全季酒店</td><td>540公里/6.5h</td></tr>
+      <tr><td class="day-num">D7</td><td>6月18日 周四</td><td>巴楚→莎车→喀什</td><td>叶尔羌汗国王陵·非遗博览园·阿曼尼莎汗陵·莎车老城</td><td>喀什希尔顿惠庭</td><td>392公里/约5h</td></tr>
+      <tr><td class="day-num">D8</td><td>6月19日 周五</td><td>喀什（休整）</td><td>地区博物馆·哈吉甫墓·古城深游·大巴扎</td><td>喀什希尔顿惠庭</td><td>市内短途</td></tr>
+      <tr><td class="day-num">D9</td><td>6月20日 周六</td><td>喀什→北京</td><td>返程</td><td>回家</td><td>约35分钟</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ROUTE OVERVIEW MAP -->
+<div id="total-map">
+  <div class="section-title">总行程路线地图</div>
+  <div class="map-container" style="height:480px;">
+    <div class="map-btn" data-src="https://uri.amap.com/navigation?from=75.9880,39.4683,喀什机场&to=75.9880,39.4683,喀什&via=75.2340,37.7720,塔什库尔干|82.9590,41.7220,库车|82.9750,41.7040,库车苏巴什|77.2500,38.4200,莎车|79.0700,39.8800,图木舒克&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=1" data-title="总行程路线">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:6px;text-align:center;">⬆ 高德地图路线（可交互）· 总里程约2,500公里 · 喀什为起点和终点的环线</p>
+</div>
+
+<!-- ROUTE VALIDATION -->
+<div id="validation">
+  <div class="section-title">路线核验总报告</div>
+  <div class="validation-section">
+    <p style="font-size:13px;color:#555;line-height:1.7;">本报告综合高德地图实时路况数据、G314国道及G3012吐和高速实际行驶经验，对原攻略各天行驶时间进行系统复核。核验考虑因素：道路等级（国道/高速）、限速规定、弯道系数、海拔变化、高原驾驶疲劳、6月旅游旺季交通状况。</p>
+    <div class="validation-grid">
+      <div class="validation-card ok">
+        <div class="v-title">D1 · 机场→酒店</div>
+        <div class="v-row"><span class="v-label">路线：</span>喀什机场→喀什古城希尔顿惠庭</div>
+        <div class="v-row"><span class="v-label">里程：</span>约28公里</div>
+        <div class="v-row"><span class="v-label">文档：</span>约30分钟</div>
+        <div class="v-row"><span class="v-label">核验：</span>约35分钟</div>
+        <div class="v-row"><span class="v-label">道路：</span>G314国道进城段</div>
+        <div class="v-row"><span class="v-label">结论：</span><span class="ok-text">✓ 基本准确（实际含市区拥堵约35分钟）</span></div>
+        <div class="v-note">机场至酒店经G314国道穿越部分市区路段，早晚高峰建议预留40-45分钟。</div>
+      </div>
+      <div class="validation-card warn">
+        <div class="v-title">D2 · 喀什→塔什库尔干</div>
+        <div class="v-row"><span class="v-label">路线：</span>全程G314国道</div>
+        <div class="v-row"><span class="v-label">里程：</span>约290公里</div>
+        <div class="v-row"><span class="v-label">文档：</span>约5小时</div>
+        <div class="v-row"><span class="v-label">核验：</span>约5.5-6小时（纯驾驶）</div>
+        <div class="v-row"><span class="v-label">道路：</span>G314国道，限速60-80km/h，多弯道</div>
+        <div class="v-row"><span class="v-label">结论：</span><span class="warn-text">⚠️ 偏乐观：G314大量弯道+海拔爬升，实际5.5-6小时</span></div>
+        <div class="v-note">G314途经奥依塔克峡谷、白沙湖等打卡点，加上塔县边防检查，含必要停留全天需预留8-9小时。建议喀什08:00出发。</div>
+      </div>
+      <div class="validation-card warn">
+        <div class="v-title">D3 · 塔什库尔干→喀什（返程）</div>
+        <div class="v-row"><span class="v-label">路线：</span>塔县→班迪尔→冰川→乌帕尔→喀什</div>
+        <div class="v-row"><span class="v-label">里程：</span>约398公里</div>
+        <div class="v-row"><span class="v-label">文档：</span>约7小时</div>
+        <div class="v-row"><span class="v-label">核验：</span>约7.5-8小时纯驾，含景点全天约11小时</div>
+        <div class="v-row"><span class="v-label">结论：</span><span class="warn-text">⚠️ 偏乐观：冰川游览约2小时，全天实际11小时</span></div>
+        <div class="v-note">建议06:30出发。班迪尔蓝湖快速停留，冰川公园约2.5小时，乌帕尔约1小时，可于20:30前返抵喀什。</div>
+      </div>
+      <div class="validation-card ok">
+        <div class="v-title">D4 · 喀什→阿克苏</div>
+        <div class="v-row"><span class="v-label">路线：</span>G3012吐和高速全程</div>
+        <div class="v-row"><span class="v-label">里程：</span>约612公里（含温宿绕行）</div>
+        <div class="v-row"><span class="v-label">文档：</span>约6小时50分</div>
+        <div class="v-row"><span class="v-label">核验：</span>约7小时（准确）</div>
+        <div class="v-row"><span class="v-label">道路：</span>G3012高速，双向六车道，限速120km/h</div>
+        <div class="v-row"><span class="v-label">结论：</span><span class="ok-text">✓ 准确：G3012全程高速，路况良好</span></div>
+        <div class="v-note">温宿大峡谷需从高速下道，绕行约30公里/30分钟，峡谷内参观约1.5-2小时。建议08:00出发，18:00-19:00抵达阿克苏。</div>
+      </div>
+      <div class="validation-card ok">
+        <div class="v-title">D5 · 阿克苏→库车（含石窟群）</div>
+        <div class="v-row"><span class="v-label">路线：</span>G3012高速+S207省道（克孜尔段）</div>
+        <div class="v-row"><span class="v-label">里程：</span>约350公里（含克孜尔绕行）</div>
+        <div class="v-row"><span class="v-label">文档：</span>约4.5小时</div>
+        <div class="v-row"><span class="v-label">核验：</span>约5小时</div>
+        <div class="v-row"><span class="v-label">结论：</span><span class="ok-text">✓ 基本准确：注意克孜尔需下高速绕行约60公里</span></div>
+        <div class="v-note">克孜尔石窟在拜城县（非库车），从G3012下高速还需行驶约60公里。全天含参观约8-9小时，建议08:00出发。</div>
+      </div>
+      <div class="validation-card ok">
+        <div class="v-title">D6 · 库车→巴楚</div>
+        <div class="v-row"><span class="v-label">路线：</span>G3012吐和高速</div>
+        <div class="v-row"><span class="v-label">里程：</span>约540公里</div>
+        <div class="v-row"><span class="v-label">文档：</span>约6.5小时</div>
+        <div class="v-row"><span class="v-label">核验：</span>约6.5小时（准确）</div>
+        <div class="v-row"><span class="v-label">结论：</span><span class="ok-text">✓ 准确：G3012高速路况良好</span></div>
+        <div class="v-note">上午博物馆群控制在3小时内，苏巴什遗址约1.5小时，14:30前出发。新疆日落约22:00，可安全21:00抵巴楚。</div>
+      </div>
+      <div class="validation-card ok">
+        <div class="v-title">D7 · 巴楚→莎车→喀什</div>
+        <div class="v-row"><span class="v-label">路线：</span>G3012高速全程</div>
+        <div class="v-row"><span class="v-label">里程：</span>巴楚-莎车115公里+莎车-喀什265公里</div>
+        <div class="v-row"><span class="v-label">文档：</span>约5小时</div>
+        <div class="v-row"><span class="v-label">核验：</span>约5小时（准确）</div>
+        <div class="v-row"><span class="v-label">结论：</span><span class="ok-text">✓ 准确：全程高速，节奏舒适</span></div>
+        <div class="v-note">莎车四处景点集中在县城1公里半径内，步行可达，参观约2.5-3小时，全天约8小时，节奏最轻松。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION POINTS TABLE -->
+<div id="navpoints">
+  <div class="section-title">高德地图导航定位点汇总</div>
+  <p style="font-size:13px;color:var(--muted);margin-bottom:10px;">出发前建议下载新疆离线地图（喀什、塔什库尔干、阿克苏、库车四个区域）。点击景点名称可直接跳转高德地图搜索。</p>
+  <table class="nav-table">
+    <thead>
+      <tr><th>景点</th><th>推荐搜索词</th><th>参考坐标</th><th>天次</th><th>备注</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><a href="https://www.amap.com/search?query=喀什地区博物馆" target="_blank">喀什地区博物馆</a></td><td>喀什地区博物馆</td><td>75.9880, 39.4720</td><td>D1/D8</td><td>天山西路28号，免费</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=高台民居喀什" target="_blank">高台民居</a></td><td>高台民居</td><td>75.9840, 39.4710</td><td>D1</td><td>吐曼路停车场</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=喀什古城景区东门" target="_blank">喀什古城</a></td><td>喀什古城景区东门</td><td>75.9920, 39.4700</td><td>D1/D8</td><td>多停车场可选</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=奥依塔克红山" target="_blank">奥依塔克红山</a></td><td>奥依塔克红山</td><td>75.5100, 38.7900</td><td>D2</td><td>G314路边，免费</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=白沙湖景区" target="_blank">白沙湖</a></td><td>白沙湖景区</td><td>75.1200, 38.3500</td><td>D2</td><td>北岸免费观景台</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=喀拉库勒湖" target="_blank">喀拉库勒湖</a></td><td>喀拉库勒湖</td><td>74.9000, 38.4700</td><td>D2</td><td>G314路边观景台</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=塔什库尔干石头城" target="_blank">石头城·金草滩</a></td><td>塔什库尔干石头城</td><td>75.2340, 37.7720</td><td>D2</td><td>汉代蒲犁国王城</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=班迪尔蓝湖" target="_blank">班迪尔蓝湖</a></td><td>班迪尔蓝湖（下坂地水库）</td><td>75.3600, 37.9400</td><td>D3</td><td>11时后色彩最佳</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=慕士塔格冰川公园" target="_blank">慕士塔格冰川公园</a></td><td>慕士塔格冰川公园</td><td>75.0400, 38.2700</td><td>D3</td><td>骑马约100元</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=乌帕尔公园" target="_blank">乌帕尔公园（双陵）</a></td><td>乌帕尔镇/乌帕尔公园</td><td>75.5400, 39.2400</td><td>D3</td><td>两处全国重点文保</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=温宿天山托木尔大峡谷" target="_blank">温宿大峡谷</a></td><td>温宿天山托木尔大峡谷</td><td>80.3500, 41.4700</td><td>D4</td><td>建议四驱</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=克孜尔千佛洞" target="_blank">克孜尔石窟</a></td><td>克孜尔千佛洞</td><td>82.4900, 41.7900</td><td>D5</td><td>世界遗产，洞内禁拍</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=库木吐喇千佛洞" target="_blank">库木吐喇石窟</a></td><td>库木吐喇千佛洞</td><td>82.7300, 41.7300</td><td>D5</td><td>门票35元</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=克孜尔尕哈烽燧" target="_blank">克孜尔尕哈烽燧</a></td><td>克孜尔尕哈烽燧</td><td>82.7200, 41.8200</td><td>D5</td><td>世界遗产，免费</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=库车龟兹博物馆" target="_blank">龟兹博物馆</a></td><td>库车龟兹博物馆（友谊路）</td><td>82.9590, 41.7220</td><td>D6</td><td>2025年5月新开，免费</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=库车王府" target="_blank">库车王府</a></td><td>库车王府</td><td>82.9500, 41.7200</td><td>D6</td><td>老城区</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=苏巴什佛寺遗址" target="_blank">苏巴什佛寺遗址</a></td><td>苏巴什佛寺遗址/昭怙厘寺</td><td>83.0700, 41.7600</td><td>D6</td><td>世界遗产</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=叶尔羌汗国王陵" target="_blank">叶尔羌汗国王陵</a></td><td>叶尔羌汗国王陵</td><td>77.2500, 38.4200</td><td>D7</td><td>全国重点文保</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=莎车非遗博览园" target="_blank">莎车非遗博览园</a></td><td>莎车非遗博览园（叶尔羌汗王宫）</td><td>77.2400, 38.4200</td><td>D7</td><td>门票35元，十二木卡姆</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=阿曼尼莎汗纪念陵" target="_blank">阿曼尼莎汗纪念陵</a></td><td>阿曼尼莎汗纪念陵</td><td>77.2400, 38.4300</td><td>D7</td><td>免费，木卡姆之母</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=玉素甫哈斯哈吉甫墓" target="_blank">玉素甫·哈吉甫墓</a></td><td>玉素甫哈斯哈吉甫墓</td><td>75.9800, 39.4800</td><td>D8</td><td>体育路，极冷门</td></tr>
+      <tr><td><a href="https://www.amap.com/search?query=唐王城遗址图木舒克" target="_blank">唐王城遗址（备选）</a></td><td>唐王城遗址/托库孜萨来</td><td>79.0700, 39.8800</td><td>D6备选</td><td>途经图木舒克</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- DAY 1 -->
+<div class="day-section" id="day1">
+  <div class="day-header">
+    <div class="day-num-badge">
+      <span class="day-zh">第</span>
+      <span class="day-n">1</span>
+      <span class="day-zh">天</span>
+    </div>
+    <div class="day-header-info">
+      <h2>初抵喀什，丝路古城首探</h2>
+      <div class="date-text">6月12日（周五）· 住宿：喀什古城希尔顿惠庭</div>
+      <div class="day-tags">
+        <span class="day-tag">飞行+市区约35分钟</span>
+        <span class="day-tag">G314国道进城</span>
+        <span class="day-tag">海拔约1,300米</span>
+        <span class="day-tag">无高原反应</span>
+      </div>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="route-stripe">
+      <div class="rs-item"><span class="rs-label">住宿：</span><span class="rs-value">喀什古城希尔顿惠庭</span></div>
+      <div class="rs-item"><span class="rs-label">驾驶：</span><span class="rs-value">约28公里 / 约35分钟（核验后）</span></div>
+      <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G314国道进城段</span></div>
+    </div>
+    <!-- D1 MAP -->
+    <div class="map-container">
+      <div class="map-btn" data-src="https://ditu.amap.com/search?query=喀什古城&query_type=RQBXY&longitude=75.9920&latitude=39.4700&range=3000" data-title="第1天地图-喀什">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第1天行动区域：喀什古城核心区（高德地图）</p>
+    
+    <!-- 点位导航链接 -->
+    <div class="static-map-row">
+      <a class="point-marker" href="https://www.amap.com/search?query=喀什地区博物馆" target="_blank"><span class="marker-dot" style="background:#1a5376;"></span>博物馆</a>
+      <a class="point-marker" href="https://www.amap.com/search?query=高台民居喀什" target="_blank"><span class="marker-dot" style="background:#c05310;"></span>高台民居</a>
+      <a class="point-marker" href="https://www.amap.com/search?query=伊斯坎德尔麻扎喀什" target="_blank"><span class="marker-dot" style="background:#2d6a4f;"></span>伊斯坎德尔麻扎</a>
+      <a class="point-marker" href="https://www.amap.com/search?query=喀什古城景区东门" target="_blank"><span class="marker-dot" style="background:#8b0000;"></span>喀什古城</a>
+      <a class="point-marker" href="https://uri.amap.com/marker?position=75.988,39.472&name=喀什古城希尔顿惠庭&src=myapp&coordinate=gaode" target="_blank"><span class="marker-dot" style="background:#e8a030;"></span>酒店导航</a>
+    </div>
+    
+    <table class="schedule-table">
+      <thead><tr><th>时段</th><th>活动</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="time-cell">14:00-15:30</td><td class="act-cell">抵达喀什机场</td><td>北京出发约4.5小时飞行，提前预订SUV（神州/一嗨，机场取车），备好边防证（D2塔县所需）</td></tr>
+        <tr><td class="time-cell">15:30-16:15</td><td class="act-cell">驾车入城</td><td>沿G314国道约28公里至酒店（约35分钟），办理入住，充电宝满电</td></tr>
+        <tr><td class="time-cell">16:30-18:30</td><td class="act-cell">喀什地区博物馆</td><td>天山西路28号，免费。重点：丝绸之路历史文物精品展，镇馆之宝南北朝三耳压花陶罐。夏季开放至21:00</td></tr>
+        <tr><td class="time-cell">19:00-20:00</td><td class="act-cell">高台民居</td><td>夕阳时分最出片，土黄色生土建筑群，光影层次丰富。停车推荐吐曼路停车场（498车位）</td></tr>
+        <tr><td class="time-cell">20:00-20:30</td><td class="act-cell">伊斯坎德尔王麻扎</td><td>叶尔羌汗国王族陵墓，导航至「市委家属院」附近，极冷门，圆顶蓝砖建筑</td></tr>
+        <tr><td class="time-cell">20:30-22:00</td><td class="act-cell">喀什古城夜游</td><td>沿吾斯塘博依路步行，穿职人巴扎，深入小巷——老茶馆、铜器铺、馕香是古城灵魂</td></tr>
+      </tbody>
+    </table>
+    
+    <div class="spots-grid">
+      <div class="spot-card">
+        <div class="spot-name">🏛️ 喀什地区博物馆</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=喀什地区博物馆" target="_blank">高德导航：喀什地区博物馆</a></div>
+        <div class="spot-desc">位于天山西路28号，2021年新馆开放，建筑面积15,100平方米，2024年获评国家二级博物馆。馆藏文物5,300余件，以「丝绸之路历史文物精品展」为基本陈列，分丝绸之路早期文化、汉唐时期文化、宋元明清文化三个单元。<strong>镇馆之宝</strong>：南北朝三耳压花陶罐（融合希腊、波斯、中原纹饰）和唐代如来泥塑佛头像。夏季开放10:00-21:00，免费，周一闭馆。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🕌 伊斯坎德尔王麻扎</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=喀什市委家属院" target="_blank">导航至：喀什市委家属院附近</a></div>
+        <div class="spot-desc">叶尔羌汗国时期的王族陵墓，为典型伊斯兰拱拜孜（圆顶）结构，外墙以蓝绿花砖装饰。此处极度冷门，几乎不见游客，适合静心感受南疆历史层叠感。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🏚️ 高台民居</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=高台民居" target="_blank">高德导航：高台民居</a></div>
+        <div class="spot-desc">喀什古城东南端，生土建筑群最后遗存。黄土高崖上层叠错落，巷道逼仄，正进行保护性修缮。傍晚夕阳打在土黄墙面，光影层次极佳，是访古摄影绝佳去处。停车：吐曼路停车场（498车位）。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🕌 喀什古城</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=喀什古城景区东门" target="_blank">高德导航：喀什古城景区东门</a></div>
+        <div class="spot-desc">中国唯一以伊斯兰文化为特色的迷宫式城市街区，距今逾两千年。以艾提尕尔清真寺为中心，放射状街巷纵横，数万维吾尔族居民至今生活于此。沿吾斯塘博依路步行，穿职人巴扎，深入远离主街的民居巷弄，感受真正的在地生活。</div>
+      </div>
+    </div>
+    <div class="tips-box">
+      <div class="tips-title">📝 注意事项</div>
+      喀什市区海拔约1,300米，无需担心高原反应。可在喀什药店购买氧气袋（20-30元/袋，建议备10袋）为后续高原行程备用。博物馆周一闭馆，本日周五正常开放。出发前确认租车手续和边防证是否齐全。
+    </div>
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div class="day-section" id="day2">
+  <div class="day-header">
+    <div class="day-num-badge"><span class="day-zh">第</span><span class="day-n">2</span><span class="day-zh">天</span></div>
+    <div class="day-header-info">
+      <h2>喀什→塔什库尔干，帕米尔高原景观大道</h2>
+      <div class="date-text">6月13日（周六）· 住宿：塔什库尔干美仑酒店</div>
+      <div class="day-tags">
+        <span class="day-tag">290公里/5.5-6小时（核验）</span>
+        <span class="day-tag">G314国道</span>
+        <span class="day-tag">需边防证</span>
+        <span class="day-tag">最高海拔约3,100米</span>
+      </div>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="route-stripe">
+      <div class="rs-item"><span class="rs-label">住宿：</span><span class="rs-value">塔什库尔干美仑酒店（或同级）</span></div>
+      <div class="rs-item"><span class="rs-label">驾驶：</span><span class="rs-value">约290公里 / 约5.5-6小时（核验后，含边检约30分钟）</span></div>
+      <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G314国道全程，限速60-80km/h，多弯道，持续爬升</span></div>
+    </div>
+    <div class="map-container">
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=75.9880,39.4683,喀什&to=75.2340,37.7720,塔什库尔干石头城&via=75.5100,38.7900,奥依塔克|75.1200,38.3500,白沙湖|74.9000,38.4700,喀拉库勒湖&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=0" data-title="第2天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第2天路线：喀什 → 奥依塔克 → 白沙湖 → 喀拉库勒湖 → 塔什库尔干（G314国道）</p>
+    <div class="static-map-row">
+      <a class="point-marker" href="https://www.amap.com/search?query=奥依塔克红山" target="_blank"><span class="marker-dot" style="background:#c05310;"></span>奥依塔克红山</a>
+      <a class="point-marker" href="https://www.amap.com/search?query=白沙湖景区" target="_blank"><span class="marker-dot" style="background:#3a98c5;"></span>白沙湖</a>
+      <a class="point-marker" href="https://www.amap.com/search?query=喀拉库勒湖" target="_blank"><span class="marker-dot" style="background:#1a5376;"></span>喀拉库勒湖</a>
+      <a class="point-marker" href="https://www.amap.com/search?query=塔什库尔干石头城" target="_blank"><span class="marker-dot" style="background:#2d6a4f;"></span>石头城·金草滩</a>
+    </div>
+    <table class="schedule-table">
+      <thead><tr><th>时段</th><th>活动</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="time-cell">08:00</td><td class="act-cell">喀什出发</td><td>G314国道南行。准备备用燃油，满油出发</td></tr>
+        <tr><td class="time-cell">09:30-10:30</td><td class="act-cell">奥依塔克红山</td><td>G314路边停车即看，赭红色砂岩雅丹地貌，约停1小时拍照</td></tr>
+        <tr><td class="time-cell">11:30-12:30</td><td class="act-cell">白沙湖</td><td>走北岸免费观景台，规避收费区，角度更佳。湖边风大，做好防风保暖</td></tr>
+        <tr><td class="time-cell">13:00-13:30</td><td class="act-cell">喀拉库勒湖</td><td>慕士塔格峰脚下，海拔3,643米，天晴可见冰峰倒影，约30分钟打卡</td></tr>
+        <tr><td class="time-cell">14:30-17:00</td><td class="act-cell">金草滩与石头城</td><td>汉代蒲犁国王城，分内外城，东侧寺院遗址可探。夕阳前抵达，金色草甸配远峰最佳</td></tr>
+        <tr><td class="time-cell">17:00-18:00</td><td class="act-cell">入住塔什库尔干</td><td>入住酒店，补充氧气，早睡养精蓄锐</td></tr>
+      </tbody>
+    </table>
+    <div class="spots-grid">
+      <div class="spot-card">
+        <div class="spot-name">🔴 奥依塔克红山</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=奥依塔克红山" target="_blank">高德导航：奥依塔克红山</a></div>
+        <div class="spot-desc">G314国道沿途天然地质景观，山体呈鲜艳赭红色，属新生代红色砂岩雅丹地貌，远望如燃烧的山脊。非收费景区，停车即可观赏，建议停留1小时拍照。极端天气可跳过。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🏔️ 白沙湖</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=白沙湖景区" target="_blank">高德导航：白沙湖景区</a></div>
+        <div class="spot-desc">海拔3,483米高原湖泊，因湖岸银白色石英砂山得名。白沙山倒映碧蓝湖面，视觉冲击极强。<strong>北岸免费观景台</strong>既规避人流又角度更佳。湖边风力极大，冲锋衣必备。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">💧 喀拉库勒湖</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=喀拉库勒湖" target="_blank">高德导航：喀拉库勒湖</a></div>
+        <div class="spot-desc">海拔3,643米，位于「冰山之父」慕士塔格峰（海拔7,546米）脚下。湖水深蓝，天晴可拍完整雪峰倒影。此站为快速打卡点，阴天或时间紧张可直接跳过。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🏰 金草滩与石头城</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=塔什库尔干石头城" target="_blank">高德导航：塔什库尔干石头城</a></div>
+        <div class="spot-desc">石头城为汉代「蒲犁国」王城遗址，丝绸之路帕米尔段重要关隘，距今逾2,000年。城址分内城外城，东侧存寺院遗址可探。城下金草滩为广袤高原湿地，夏季水草丰茂，日落时分金色草甸配慕士塔格峰，是南疆最具代表性画面。</div>
+      </div>
+    </div>
+    <div class="tips-box">
+      <div class="tips-title">📝 注意事项</div>
+      前往塔县必须携带边防证（户籍地公安局或喀什当地办理，建议提前2周以上）。塔县海拔约3,100米，当晚可能头晕，服用红景天，准备氧气袋，夜间不要剧烈运动。白沙湖北岸为免费观景点，南岸需购票。核验提示：G314国道实际驾驶时间约5.5-6小时，非原文标注的5小时，建议08:00出发保证行程从容。
+    </div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day-section" id="day3">
+  <div class="day-header">
+    <div class="day-num-badge"><span class="day-zh">第</span><span class="day-n">3</span><span class="day-zh">天</span></div>
+    <div class="day-header-info">
+      <h2>塔什库尔干→喀什，冰山之父·双陵访古</h2>
+      <div class="date-text">6月14日（周日）· 住宿：喀什古城希尔顿惠庭</div>
+      <div class="day-tags">
+        <span class="day-tag">398公里/7.5-8h（核验）</span>
+        <span class="day-tag">G314国道返程</span>
+        <span class="day-tag">06:30出发</span>
+        <span class="day-tag">最高海拔约4,688米（冰川）</span>
+      </div>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="route-stripe">
+      <div class="rs-item"><span class="rs-label">住宿：</span><span class="rs-value">喀什古城希尔顿惠庭</span></div>
+      <div class="rs-item"><span class="rs-label">驾驶：</span><span class="rs-value">约398公里 / 约7.5-8小时（核验后），含景点全天约11小时</span></div>
+      <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G314国道返程，下山段</span></div>
+    </div>
+    <div class="map-container">
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=75.2340,37.7720,塔什库尔干&to=75.9880,39.4683,喀什&via=75.3600,37.9400,班迪尔蓝湖|75.0400,38.2700,慕士塔格冰川公园|75.5400,39.2400,乌帕尔公园&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=0" data-title="第3天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第3天路线：塔什库尔干 → 班迪尔蓝湖 → 慕士塔格冰川 → 乌帕尔双陵 → 喀什（G314国道）</p>
+    <table class="schedule-table">
+      <thead><tr><th>时段</th><th>活动</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="time-cell">06:30</td><td class="act-cell">尽早出发</td><td>当天行程最密集，必须尽早出发</td></tr>
+        <tr><td class="time-cell">07:30-08:00</td><td class="act-cell">班迪尔蓝湖</td><td>下坂地水库，11时后色最佳，清晨可快速经过；低水位景观一般可跳过</td></tr>
+        <tr><td class="time-cell">09:00-11:30</td><td class="act-cell">慕士塔格冰川公园</td><td>乘区间车至半山，骑马约20分钟（往返100元）抵冰川前沿，冰塔林、冰裂缝、蓝冰洞壮观</td></tr>
+        <tr><td class="time-cell">11:30-15:00</td><td class="act-cell">G314北行</td><td>翻越奥依塔克峡谷，下山段路况较好，沿途可快速浏览来时错过的风景</td></tr>
+        <tr><td class="time-cell">15:00-16:30</td><td class="act-cell">乌帕尔公园（双陵）</td><td>阿帕霍加墓+麻赫穆德·喀什噶里墓，两处全国重点文保，游客极稀</td></tr>
+        <tr><td class="time-cell">18:00-20:00</td><td class="act-cell">返抵喀什</td><td>视路况而定，沿G314入城休整</td></tr>
+      </tbody>
+    </table>
+    <div class="spots-grid">
+      <div class="spot-card">
+        <div class="spot-name">🔵 班迪尔蓝湖</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=班迪尔蓝湖" target="_blank">高德导航：班迪尔蓝湖（下坂地水库）</a></div>
+        <div class="spot-desc">塔什库尔干河谷中的高峡平湖，湖水在上午11时后因光线折射呈现浓郁蒂芙尼蓝。近年因上游来水减少水位有所下降，如遇低水位可缩短停留，为冰川行程留出余地。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🧊 慕士塔格冰川公园</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=慕士塔格冰川公园" target="_blank">高德导航：慕士塔格冰川公园</a></div>
+        <div class="spot-desc">「冰山之父」慕士塔格峰（7,546米）4号冰川，中国纬度最低的现代冰川，冰舌末端海拔仅约4,688米。乘区间车至半山，骑马约20分钟可抵冰川前沿（往返100元）。冰塔林、冰裂缝和蓝冰洞蔚为壮观，是普通游客能近距离接触冰川的难得机会。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🕌 阿帕霍加墓</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=乌帕尔公园" target="_blank">导航至：乌帕尔镇/乌帕尔公园</a></div>
+        <div class="spot-desc">疏附县乌帕尔镇，喀拉汗王朝王族麻扎，始建17世纪，蓝绿琉璃砖和尖拱门廊为特色。全国重点文物保护单位，游客极稀少，是南疆访古的秘境之地。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">📖 麻赫穆德·喀什噶里墓</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=乌帕尔公园" target="_blank">导航至：乌帕尔镇/乌帕尔公园</a></div>
+        <div class="spot-desc">11世纪维吾尔族大学者、《突厥语大词典》（Diwan Lughat al-Turk）编纂者之墓。《突厥语大词典》是突厥语言学奠基之作，影响深远。全国重点文物保护单位，与阿帕霍加墓相距不远。</div>
+      </div>
+    </div>
+    <div class="tips-box">
+      <div class="tips-title">📝 注意事项</div>
+      本日全程最长，必须06:30出发。冰川公园海拔4,000米以上，提前服用红景天并带足氧气袋。冰川区域天气多变，备好冲锋衣和防风帽。乌帕尔公园游客极稀，可能需问路当地人。核验提示：第3天原文标注「约7小时」，含景点实际全天约11小时，必须尽早出发。
+    </div>
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<div class="day-section" id="day4">
+  <div class="day-header">
+    <div class="day-num-badge"><span class="day-zh">第</span><span class="day-n">4</span><span class="day-zh">天</span></div>
+    <div class="day-header-info">
+      <h2>喀什→阿克苏，天山南麓高速东行</h2>
+      <div class="date-text">6月15日（周一）· 住宿：阿克苏希尔顿花园酒店</div>
+      <div class="day-tags">
+        <span class="day-tag">612公里/约7小时（核验）</span>
+        <span class="day-tag">G3012吐和高速</span>
+        <span class="day-tag">限速120km/h</span>
+        <span class="day-tag">博物馆周一闭馆</span>
+      </div>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="route-stripe">
+      <div class="rs-item"><span class="rs-label">住宿：</span><span class="rs-value">阿克苏希尔顿花园酒店</span></div>
+      <div class="rs-item"><span class="rs-label">驾驶：</span><span class="rs-value">约612公里 / 约7小时（核验后准确，含温宿停留约9-10小时）</span></div>
+      <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G3012吐和高速，双向六车道，限速120km/h</span></div>
+    </div>
+    <div class="map-container">
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=75.9880,39.4683,喀什&to=80.2638,41.1677,阿克苏&via=80.3500,41.4700,温宿大峡谷&mode=car&policy=0&src=myapp&coordinate=gaode&callnative=0" data-title="第4天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第4天路线：喀什 → 温宿大峡谷 → 阿克苏（G3012吐和高速）</p>
+    <table class="schedule-table">
+      <thead><tr><th>时段</th><th>活动</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="time-cell">08:00</td><td class="act-cell">喀什出发</td><td>上G3012吐和高速，沿天山南麓全程东行。满油出发，服务区约每80-100公里一处</td></tr>
+        <tr><td class="time-cell">11:00-12:00</td><td class="act-cell">卡德尔王陵（温宿）</td><td>温宿古城古墓群，戈壁台地上的清代至民国王陵麻扎群，无游客无商业，荒凉庄严</td></tr>
+        <tr><td class="time-cell">12:00-14:00</td><td class="act-cell">温宿大峡谷</td><td>中国最大盐丘地质峡谷群，建议四驱进谷，两驱乘区间车。峡谷色彩赭红渐变紫褐，傍晚光线最出片</td></tr>
+        <tr><td class="time-cell">14:30-17:00</td><td class="act-cell">继续东行</td><td>温宿出来后重上G3012，继续约2.5小时至阿克苏市区</td></tr>
+        <tr><td class="time-cell">18:00-19:30</td><td class="act-cell">阿克苏老街</td><td>傍晚最热闹，烤包子、手抓饭、大盘鸡等夜市美食，体验阿克苏本地生活</td></tr>
+      </tbody>
+    </table>
+    <div class="spots-grid">
+      <div class="spot-card">
+        <div class="spot-name">⛰️ 温宿大峡谷</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=温宿天山托木尔大峡谷" target="_blank">高德导航：温宿天山托木尔大峡谷</a></div>
+        <div class="spot-desc">正式名「温宿天山托木尔大峡谷」，中国最大盐丘地质构造峡谷群，面积约200平方公里，由白垩纪红色砂岩经亿万年风蚀水切而成。峡谷内沟壑纵横，崖壁如刀削斧劈，色彩从赭红渐变至紫褐。<strong>建议四驱</strong>车驶入谷底（两驱车乘区间车）。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🪦 卡德尔王陵·温宿古城古墓群</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=温宿古城古墓群" target="_blank">高德导航：温宿古城古墓群</a></div>
+        <div class="spot-desc">温宿县城附近，清代至民国时期的温宿地区王陵与麻扎群。墓地散布戈壁台地，拱拜孜建筑多已风化但轮廓完整。无游客无商业开发，荒凉中透着庄严，适合静心探访。</div>
+      </div>
+    </div>
+    <div class="tips-box">
+      <div class="tips-title">📝 注意事项</div>
+      G3012全程高速，路况良好，出发前满油。本日为周一，博物馆闭馆，攻略已回避。温宿大峡谷需从高速下道绕行约30公里/30分钟，四驱车可驶入谷底，两驱车建议乘区间车。全天含温宿停留约9-10小时，建议08:00出发，18:00-19:00抵达阿克苏。
+    </div>
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div class="day-section" id="day5">
+  <div class="day-header">
+    <div class="day-num-badge"><span class="day-zh">第</span><span class="day-n">5</span><span class="day-zh">天</span></div>
+    <div class="day-header-info">
+      <h2>阿克苏→库车，丝路佛光·龟兹遗韵</h2>
+      <div class="date-text">6月16日（周二）· 住宿：库车希尔顿惠庭</div>
+      <div class="day-tags">
+        <span class="day-tag">350公里/约5小时（核验）</span>
+        <span class="day-tag">G3012+S207</span>
+        <span class="day-tag">世界文化遗产×3处</span>
+        <span class="day-tag">洞内禁拍照</span>
+      </div>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="route-stripe">
+      <div class="rs-item"><span class="rs-label">住宿：</span><span class="rs-value">库车希尔顿惠庭</span></div>
+      <div class="rs-item"><span class="rs-label">驾驶：</span><span class="rs-value">约350公里 / 约5小时（核验后，全天含参观约9小时）</span></div>
+      <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G3012高速+S207省道（克孜尔段）</span></div>
+    </div>
+    <div class="map-container">
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=80.2638,41.1677,阿克苏&to=82.9590,41.7220,库车&via=82.4900,41.7900,克孜尔千佛洞|82.7300,41.7300,库木吐喇千佛洞|82.7200,41.8200,克孜尔尕哈烽燧&mode=car&policy=1&src=myapp&coordinate=gaode&callnative=0" data-title="第5天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第5天路线：阿克苏 → 克孜尔石窟 → 库木吐喇石窟 → 克孜尔尕哈烽燧 → 库车</p>
+    <table class="schedule-table">
+      <thead><tr><th>时段</th><th>活动</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="time-cell">08:00</td><td class="act-cell">阿克苏出发</td><td>G3012高速，转S207省道前往拜城县克孜尔</td></tr>
+        <tr><td class="time-cell">09:30-12:00</td><td class="act-cell">克孜尔石窟</td><td>中国最早大型石窟群，世界遗产。普通窟约6个，特窟需提前10天以上预约。<strong>洞内禁拍照</strong>，自备手电</td></tr>
+        <tr><td class="time-cell">12:00-13:30</td><td class="act-cell">克孜尔→库木吐喇</td><td>约90公里/1.5小时（走山地省道），途中可在拜城县城用午餐</td></tr>
+        <tr><td class="time-cell">13:30-16:00</td><td class="act-cell">库木吐喇石窟</td><td>新疆第二大石窟群，门票35元，10:00-20:00开放。「龟兹风」与「汉风」兼具，唐代汉字榜题保存完好</td></tr>
+        <tr><td class="time-cell">16:00-17:00</td><td class="act-cell">克孜尔尕哈烽燧</td><td>从库木吐喇返回库车途中顺路，汉代烽燧，世界遗产，残高13米，孤立苍茫戈壁中</td></tr>
+        <tr><td class="time-cell">17:30-18:00</td><td class="act-cell">抵达库车</td><td>入住酒店，为明日龟兹博物馆群做准备</td></tr>
+      </tbody>
+    </table>
+    <div class="spots-grid">
+      <div class="spot-card">
+        <div class="spot-name">🖼️ 克孜尔石窟</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=克孜尔千佛洞" target="_blank">高德导航：克孜尔千佛洞</a></div>
+        <div class="spot-desc">拜城县克孜尔镇，明屋塔格山崖壁。开凿于公元3世纪，<strong>比敦煌莫高窟早约200年</strong>，中国最早大型石窟群。1961年第一批全国重点文保，2014年世界文化遗产。现存236窟，壁画约1万平方米。以菱格因缘故事画和本生故事画最具特色，大量使用青金石蓝颜料，至今鲜艳。鸠摩罗什大师出生地。洞内严禁拍照，请自备手电。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🖼️ 库木吐喇石窟</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=库木吐喇千佛洞" target="_blank">高德导航：库木吐喇千佛洞</a></div>
+        <div class="spot-desc">库车市区西约24公里，渭干河东岸。新疆第二大石窟群，现存112窟，1961年第一批全国重点文保。始凿公元5世纪，7-8世纪鼎盛。<strong>独特之处</strong>在于壁画兼具「龟兹风」与「汉风」——既有西域晕染法，也可见唐代经变画和汉字榜题，是唐王朝管辖西域的珍贵见证。门票35元，10:00-20:00开放。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🔦 克孜尔尕哈烽燧</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=克孜尔尕哈烽燧" target="_blank">高德导航：克孜尔尕哈烽燧</a></div>
+        <div class="spot-desc">库车市区西北约12公里的戈壁上，汉代军事警报设施，2014年世界文化遗产（「丝绸之路：长安—天山廊道路网」组成部分）。烽燧残高约13米，以黄土夯筑，是丝绸之路上保存最完好、年代最早的汉代烽燧。两千余年屹立不倒，孤零零矗立苍茫戈壁，极具历史冲击感。无门票无时间限制，从库木吐喇返回途中顺路可达。</div>
+      </div>
+    </div>
+    <div class="tips-box">
+      <div class="tips-title">📝 注意事项</div>
+      克孜尔石窟特窟须提前10天以上通过新疆龟兹研究院官网预约。库木吐喇特窟须提前约20天邮件预约。两处石窟内部严禁拍照、触摸壁画。克孜尔在拜城县（非库车），从G3012下高速后还需行驶约60公里，核验提示：全天约9小时，建议08:00出发。
+    </div>
+  </div>
+</div>
+
+<!-- DAY 6 -->
+<div class="day-section" id="day6">
+  <div class="day-header">
+    <div class="day-num-badge"><span class="day-zh">第</span><span class="day-n">6</span><span class="day-zh">天</span></div>
+    <div class="day-header-info">
+      <h2>库车深度访古→巴楚，龟兹核心遗址</h2>
+      <div class="date-text">6月17日（周三）· 住宿：巴楚全季酒店</div>
+      <div class="day-tags">
+        <span class="day-tag">540公里/6.5小时（核验准确）</span>
+        <span class="day-tag">G3012高速</span>
+        <span class="day-tag">14:30前出发</span>
+        <span class="day-tag">新疆日落约22:00</span>
+      </div>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="route-stripe">
+      <div class="rs-item"><span class="rs-label">住宿：</span><span class="rs-value">巴楚全季酒店</span></div>
+      <div class="rs-item"><span class="rs-label">驾驶：</span><span class="rs-value">约540公里 / 约6.5小时（核验后准确）</span></div>
+      <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G3012吐和高速，限速120km/h</span></div>
+    </div>
+    <div class="map-container">
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=82.9590,41.7220,库车&to=78.5510,39.7920,巴楚&via=83.0700,41.7600,苏巴什佛寺遗址&mode=car&policy=0&src=myapp&coordinate=gaode&callnative=0" data-title="第6天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第6天路线：库车（龟兹博物馆群+苏巴什遗址）→ 巴楚（G3012高速西行）</p>
+    <table class="schedule-table">
+      <thead><tr><th>时段</th><th>活动</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="time-cell">10:00-11:00</td><td class="act-cell">龟兹博物馆</td><td>友谊路，2025年5月新开放，国内首家龟兹文化综合博物馆，免费，重点看佛教文化艺术展厅</td></tr>
+        <tr><td class="time-cell">11:00-11:45</td><td class="act-cell">龟兹魏晋古墓博物馆</td><td>透过玻璃地面观看墓室结构，出土五铢钱、丝织品</td></tr>
+        <tr><td class="time-cell">11:45-12:30</td><td class="act-cell">库车王府</td><td>乾隆年间册封的回部亲王王府，陈列库车出土文物和民俗展品</td></tr>
+        <tr><td class="time-cell">12:30-13:30</td><td class="act-cell">午餐</td><td>老城区本地餐馆，推荐库车大馕和手工粉汤</td></tr>
+        <tr><td class="time-cell">13:30-15:00</td><td class="act-cell">苏巴什佛寺遗址</td><td>世界遗产，铜厂河两岸东西双寺，新疆最大佛寺遗址群，玄奘曾在此讲经</td></tr>
+        <tr><td class="time-cell">15:00</td><td class="act-cell">出发西行</td><td>上G3012高速西行约540公里至巴楚，利用新疆日落晚（约22:00）安全抵达</td></tr>
+        <tr><td class="time-cell">21:30-22:00</td><td class="act-cell">抵达巴楚</td><td>入住巴楚全季酒店，建议提前电话确认</td></tr>
+      </tbody>
+    </table>
+    <div class="spots-grid">
+      <div class="spot-card">
+        <div class="spot-name">🏛️ 龟兹博物馆</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=库车龟兹博物馆" target="_blank">高德导航：库车龟兹博物馆（友谊路）</a></div>
+        <div class="spot-desc">2025年5月新开放，国内首家龟兹文化综合博物馆，建筑面积16,201平方米，展出文物700余件。「龟兹历史文化基本陈列」按编年体通史呈现龟兹从先秦至隋唐历史。开放10:00-19:00，免费，周三正常开放。建议参观1小时，重点看佛教文化艺术展厅。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">⚰️ 龟兹魏晋古墓遗址博物馆</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=库车魏晋古墓博物馆" target="_blank">高德搜索：库车魏晋古墓博物馆</a></div>
+        <div class="spot-desc">近年配合城市建设发现的魏晋时期大型砖室墓群，出土五铢钱、丝织品、陶器等珍贵文物。博物馆建于原址之上，透过玻璃地面可直接观看墓室结构，是了解古代龟兹丧葬文化的第一手资料。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🏯 库车王府</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=库车王府" target="_blank">高德导航：库车王府</a></div>
+        <div class="spot-desc">清乾隆年间册封的库车回部亲王王府，末代王爷达吾提·买合苏提（1927-2014年）曾在此居住。王府陈列库车地区出土文物和民俗展品，是了解库车近现代历史的核心窗口。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🗿 苏巴什佛寺遗址（昭怙厘寺）</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=苏巴什佛寺遗址" target="_blank">高德导航：苏巴什佛寺遗址/昭怙厘寺</a></div>
+        <div class="spot-desc">库车市区东北约23公里，2014年世界文化遗产。遗址分东寺西寺，铜厂河两岸，占地约20万平方米，是<strong>新疆现存规模最大佛寺遗址群</strong>。玄奘西行途经龟兹时曾在此讲经说法，《西游记》中「女儿国」的创作灵感据传源于此地传闻。</div>
+      </div>
+    </div>
+    <div class="tips-box">
+      <div class="tips-title">📝 注意事项</div>
+      上午博物馆群三处均在库车老城区半径约2公里内，步行或短途驾车可达。14:30前出发确保晚间安全抵达巴楚。图木舒克唐王城遗址若时间充裕可途中停留（增加约1.5小时）。巴楚全季酒店为县城较新连锁，建议提前电话确认房间。
+    </div>
+  </div>
+</div>
+
+<!-- DAY 7 -->
+<div class="day-section" id="day7">
+  <div class="day-header">
+    <div class="day-num-badge"><span class="day-zh">第</span><span class="day-n">7</span><span class="day-zh">天</span></div>
+    <div class="day-header-info">
+      <h2>巴楚→莎车→喀什，叶尔羌汗国遗韵</h2>
+      <div class="date-text">6月18日（周四）· 住宿：喀什古城希尔顿惠庭</div>
+      <div class="day-tags">
+        <span class="day-tag">392公里/约5小时（核验准确）</span>
+        <span class="day-tag">G3012高速全程</span>
+        <span class="day-tag">节奏最轻松</span>
+      </div>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="route-stripe">
+      <div class="rs-item"><span class="rs-label">住宿：</span><span class="rs-value">喀什古城希尔顿惠庭</span></div>
+      <div class="rs-item"><span class="rs-label">驾驶：</span><span class="rs-value">约392公里（巴楚-莎车115公里+莎车-喀什265公里） / 约5小时（核验后准确）</span></div>
+      <div class="rs-item"><span class="rs-label">道路：</span><span class="rs-value">G3012高速全程</span></div>
+    </div>
+    <div class="map-container">
+      <div class="map-btn" data-src="https://uri.amap.com/navigation?from=78.5510,39.7920,巴楚&to=75.9880,39.4683,喀什&via=77.2500,38.4200,莎车叶尔羌汗国王陵&mode=car&policy=0&src=myapp&coordinate=gaode&callnative=0" data-title="第7天路线地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第7天路线：巴楚 → 莎车（叶尔羌汗国遗址群）→ 喀什（G3012高速全程）</p>
+    <table class="schedule-table">
+      <thead><tr><th>时段</th><th>活动</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="time-cell">09:00</td><td class="act-cell">巴楚出发</td><td>G3012高速东南行约115公里至莎车，约1.5小时</td></tr>
+        <tr><td class="time-cell">10:30-11:30</td><td class="act-cell">叶尔羌汗国王陵</td><td>莎车县城中心，全国重点文保，精美石膏花饰和阿拉伯铭文</td></tr>
+        <tr><td class="time-cell">11:30-13:00</td><td class="act-cell">莎车非遗博览园</td><td>叶尔羌汗王宫原址，101项非遗，「十二木卡姆」歌舞表演，门票35元</td></tr>
+        <tr><td class="time-cell">13:00-13:30</td><td class="act-cell">午餐</td><td>老城内本地餐馆，推荐莎车鸽子汤和烤包子</td></tr>
+        <tr><td class="time-cell">13:30-14:00</td><td class="act-cell">阿曼尼莎汗纪念陵</td><td>木卡姆之母，陵高22米，蓝绿琉璃砖，陵内刻有情诗，免费全年开放</td></tr>
+        <tr><td class="time-cell">14:00-15:30</td><td class="act-cell">莎车老城</td><td>喀赞其街（铁匠街）步行，玄奘讲经台、满洲涝坝等古迹，极原生态</td></tr>
+        <tr><td class="time-cell">15:30-18:30</td><td class="act-cell">返回喀什</td><td>莎车至喀什约265公里/3小时，G3012全程高速</td></tr>
+      </tbody>
+    </table>
+    <div class="spots-grid">
+      <div class="spot-card">
+        <div class="spot-name">🕌 叶尔羌汗国王陵</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=叶尔羌汗国王陵" target="_blank">高德导航：叶尔羌汗国王陵</a></div>
+        <div class="spot-desc">莎车县城中心，叶尔羌汗国（1514-1680年）历代汗王及王室成员陵墓群，全国重点文物保护单位。以石膏雕塑装饰的拱拜孜式建筑为特色，外墙和墓壁遍布精美石膏花饰和阿拉伯文铭文，展现16-17世纪叶尔羌汗国独特的伊斯兰建筑风格。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🎭 莎车非遗博览园（叶尔羌汗王宫）</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=莎车非遗博览园" target="_blank">高德导航：莎车非遗博览园</a></div>
+        <div class="spot-desc">原址为叶尔羌汗国王宫，宫殿院落式建筑融合维吾尔族、中亚与伊斯兰风格。园内珍藏101项非物质文化遗产，每日有「十二木卡姆」等非遗歌舞表演，还设手工艺体验区可亲手制作陶器。门票35元，约10:00开门。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">💃 阿曼尼莎汗纪念陵</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=阿曼尼莎汗纪念陵" target="_blank">高德导航：阿曼尼莎汗纪念陵</a></div>
+        <div class="spot-desc">阿曼尼莎汗（1533-1560年），叶尔羌汗国第二代汗王王后，杰出诗人、音乐家，搜集整理了「十二木卡姆」，被维吾尔族人民尊为「木卡姆之母」。纪念陵高22米，建于正方形基座，外墙蓝绿琉璃砖装饰，陵内刻有她创作的情诗，充满浪漫气息。免费参观，全年开放。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🏘️ 莎车老城</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=莎车老城景区" target="_blank">高德导航：莎车老城景区/喀赞其街</a></div>
+        <div class="spot-desc">古丝绸之路南道重镇，历史可追溯至汉代。老城景区包含11处文物古迹、187条特色街巷和227处历史民居。沿喀赞其街（铁匠街）步行感受传统维吾尔手工艺。玄奘讲经台遗址和满洲涝坝等古迹游客罕至，保留极为原生态的南疆小城风貌。比喀什古城更有烟火气。</div>
+      </div>
+    </div>
+    <div class="tips-box">
+      <div class="tips-title">📝 注意事项</div>
+      莎车四站集中在县城中心半径约1公里内，步行可达。莎车老城保留大量未开发原生风貌，比喀什古城更具烟火气。如对木卡姆音乐感兴趣，博览园的每日表演不容错过。核验结论：本日路线准确，节奏最轻松，全天约8小时有余。
+    </div>
+  </div>
+</div>
+
+<!-- DAY 8 -->
+<div class="day-section" id="day8">
+  <div class="day-header">
+    <div class="day-num-badge"><span class="day-zh">第</span><span class="day-n">8</span><span class="day-zh">天</span></div>
+    <div class="day-header-info">
+      <h2>喀什休整日，深度漫游</h2>
+      <div class="date-text">6月19日（周五）· 住宿：喀什古城希尔顿惠庭</div>
+      <div class="day-tags">
+        <span class="day-tag">市内短途</span>
+        <span class="day-tag">轻松节奏</span>
+        <span class="day-tag">深度探索古城</span>
+      </div>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="map-container">
+      <div class="map-btn" data-src="https://ditu.amap.com/search?query=喀什中西亚国际贸易市场&query_type=RQBXY&longitude=75.9800&latitude=39.4800&range=5000" data-title="第8天喀什地图">
+        <div class="map-btn-icon">🗺️</div>
+        <div class="map-btn-text">点击加载导航地图</div>
+        <div class="map-btn-sub">（轻触加载，避免同时打开多个地图）</div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);text-align:center;margin-top:5px;">第8天行动区域：喀什市区（高德地图）</p>
+    <table class="schedule-table">
+      <thead><tr><th>时段</th><th>活动</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="time-cell">10:00-12:00</td><td class="act-cell">喀什地区博物馆（深度）</td><td>重点看汉唐时期佛教文物和丝绸之路钱币展，预留1.5-2小时</td></tr>
+        <tr><td class="time-cell">12:00-12:30</td><td class="act-cell">玉素甫·哈吉甫墓</td><td>体育路，《福乐智慧》作者之墓，蓝绿琉璃穹顶，极冷门，游客极少</td></tr>
+        <tr><td class="time-cell">12:30-13:30</td><td class="act-cell">午餐</td><td>古城内本地餐馆，推荐烤羊排或抓饭</td></tr>
+        <tr><td class="time-cell">13:30-17:00</td><td class="act-cell">喀什古城深度探索</td><td>避开首日主街，深入喀日克路、阿热亚路等偏僻小巷，寻找百年老茶馆和土陶作坊</td></tr>
+        <tr><td class="time-cell">17:00-19:00</td><td class="act-cell">大巴扎</td><td>新疆最大国际贸易市场，傍晚光线柔和，市场氛围最热闹，采购英吉沙小刀和艾德莱斯绸</td></tr>
+        <tr><td class="time-cell">20:00</td><td class="act-cell">整理行装</td><td>打包行李，为明日返程做准备，归还多余氧气袋</td></tr>
+      </tbody>
+    </table>
+    <div class="spots-grid">
+      <div class="spot-card">
+        <div class="spot-name">📚 玉素甫·哈斯·哈吉甫墓</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=玉素甫哈斯哈吉甫墓" target="_blank">高德导航：玉素甫哈斯哈吉甫墓</a></div>
+        <div class="spot-desc">喀什市体育路，11世纪维吾尔族伟大思想家、《福乐智慧》（Kutadgu Bilik）作者的长眠之地。《福乐智慧》是维吾尔族古典文学最高成就，以诗歌形式论述伦理与政治哲学。陵墓为蓝绿色琉璃穹顶结构，内部墙面刻有《福乐智慧》诗句摘录。游客极少，极具观赏价值。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-name">🛒 喀什中西亚国际贸易市场</div>
+        <div class="spot-nav">📍 <a href="https://www.amap.com/search?query=喀什中西亚国际贸易市场" target="_blank">高德导航：喀什中西亚国际贸易市场</a></div>
+        <div class="spot-desc">新疆最大国际贸易市场，干果、药材、英吉沙小刀、艾德莱斯绸、手工地毯应有尽有。建议傍晚前往，光线柔和，市场氛围最热闹。</div>
+      </div>
+    </div>
+    <div class="tips-box">
+      <div class="tips-title">📝 注意事项</div>
+      休整日节奏完全自由，根据前几日体力状况灵活调整。上午博物馆，下午古城，傍晚集市是最佳节奏。晚间整理行装，为次日返程做准备。
+    </div>
+  </div>
+</div>
+
+<!-- DAY 9 -->
+<div class="day-section" id="day9">
+  <div class="day-header">
+    <div class="day-num-badge"><span class="day-zh">第</span><span class="day-n">9</span><span class="day-zh">天</span></div>
+    <div class="day-header-info">
+      <h2>喀什→北京，带着丝路记忆返程</h2>
+      <div class="date-text">6月20日（周六）· 航班返京</div>
+      <div class="day-tags">
+        <span class="day-tag">约28公里/约35分钟</span>
+        <span class="day-tag">机场高速辅路</span>
+        <span class="day-tag">提前3小时到机场</span>
+      </div>
+    </div>
+  </div>
+  <div class="day-body">
+    <table class="schedule-table">
+      <thead><tr><th>时段</th><th>活动</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td class="time-cell">航班前3小时</td><td class="act-cell">酒店出发</td><td>根据航班时刻提前3小时出发（约28公里/35分钟），预留还车和安检时间</td></tr>
+        <tr><td class="time-cell">到达机场后</td><td class="act-cell">还车+值机</td><td>还车（确认车辆无划痕），办理值机和安检，提前完成行李托运</td></tr>
+        <tr><td class="time-cell">登机</td><td class="act-cell">候机返京</td><td>喀什直飞北京约4.5小时，带着满满的丝路访古记忆踏上归程</td></tr>
+      </tbody>
+    </table>
+    <div class="tips-box">
+      <div class="tips-title">📝 注意事项</div>
+      建议国内航班至少提前2.5-3小时到达机场。如有租用氧气袋，出发前归还药店。喀什机场有直飞北京的航班（约4.5小时）。行程圆满结束，2,500公里的丝路访古之旅，是一份属于南疆的深厚礼物。
+    </div>
+  </div>
+</div>
+
+<!-- PREPARATION -->
+<div id="prep">
+  <div class="section-title">行前准备清单</div>
+  <div class="prep-grid">
+    <div class="prep-card">
+      <div class="prep-title">🪪 证件</div>
+      <ul>
+        <li>身份证</li>
+        <li>边防证（塔什库尔干方向，户籍地公安局或喀什当地办理，建议提前2周以上）</li>
+        <li>驾驶证（租车用）</li>
+        <li>车辆行驶证（租车公司提供）</li>
+      </ul>
+    </div>
+    <div class="prep-card">
+      <div class="prep-title">🏔️ 高原准备</div>
+      <ul>
+        <li>氧气袋：喀什药店购买，约20-30元/袋，建议备10袋</li>
+        <li>红景天：出发前一周开始服用（高血压者慎用）</li>
+        <li>防晒：SPF50+防晒霜、UV400墨镜、宽檐遮阳帽</li>
+        <li>保湿：润唇膏、保湿面霜（南疆极干燥）</li>
+        <li>防风冲锋衣（白沙湖、喀拉库勒湖风力极大）</li>
+      </ul>
+    </div>
+    <div class="prep-card">
+      <div class="prep-title">🚗 车辆</div>
+      <ul>
+        <li>SUV或越野车优先（G314塔县段路面一般，温宿大峡谷建议四驱）</li>
+        <li>备胎（至少1个）、千斤顶、拖车绳</li>
+        <li>行车记录仪（建议前后双录）</li>
+        <li>出发前检查：机油、刹车液、冷却液、轮胎气压</li>
+      </ul>
+    </div>
+    <div class="prep-card">
+      <div class="prep-title">👗 衣物</div>
+      <ul>
+        <li>夏季轻薄衣物：喀什、阿克苏白天可达30°C以上</li>
+        <li>冲锋衣或薄羽绒服：塔县和冰川海拔4,000米以上，可能降至0°C</li>
+        <li>舒适徒步鞋：石窟和遗址多为土路</li>
+        <li>防水外套（高山区天气多变）</li>
+      </ul>
+    </div>
+    <div class="prep-card">
+      <div class="prep-title">🎒 装备与其他</div>
+      <ul>
+        <li>小手电筒/头灯：石窟内部光线极暗</li>
+        <li>充电宝（20,000mAh以上）：部分路段信号差，手机耗电快</li>
+        <li>离线地图：提前下载喀什、塔什库尔干、阿克苏、库车区域</li>
+        <li>现金（至少2,000元）：偏远遗址不支持移动支付</li>
+        <li>常用药品：肠胃药、感冒药、创可贴、布洛芬（高原头痛备用）</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<div class="page-footer">
+  新疆南疆自驾访古攻略 v4.0 · 生成于2026年5月28日 · 含路线核验版<br>
+  底图来源：高德地图 · 导航数据：高德地图WebService API<br>
+  核验方法：综合G314国道与G3012高速实路数据、海拔变化、6月旅游旺季交通状况
+</div>
+
+<script>
+// Highlight active nav item on scroll
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('.top-nav a');
+
+// Throttled scroll handler for iOS
+let scrollTicking = false;
+window.addEventListener('scroll', function() {
+  if (!scrollTicking) {
+    requestAnimationFrame(function() {
+      var current = '';
+      for (var i = 0; i < sections.length; i++) {
+        var sectionTop = sections[i].offsetTop - 80;
+        if (window.pageYOffset >= sectionTop) {
+          current = sections[i].getAttribute('id');
+        }
+      }
+      for (var j = 0; j < navLinks.length; j++) {
+        navLinks[j].classList.remove('active');
+        if (navLinks[j].getAttribute('href') === '#' + current) {
+          navLinks[j].classList.add('active');
+        }
+      }
+      scrollTicking = false;
+    });
+    scrollTicking = true;
+  }
+});
+
+// ===== Click-to-Load Maps (iOS Safari fix) =====
+function loadMap(placeholder) {
+  if (placeholder.classList.contains('loaded')) return;
+  
+  const src = placeholder.getAttribute('data-src');
+  if (!src) return;
+  
+  // Show loading state
+  placeholder.classList.add('loaded');
+  placeholder.style.background = '#f0ede5';
+  placeholder.innerHTML = '<div style="text-align:center;color:#999;padding-top:160px;">⏳ 地图加载中…</div>';
+  
+  // Create iframe
+  const iframe = document.createElement('iframe');
+  iframe.src = src;
+  iframe.className = 'amap-embed';
+  iframe.setAttribute('allowfullscreen', '');
+  iframe.style.width = '100%';
+  iframe.style.height = '100%';
+  iframe.style.border = '0';
+  iframe.style.borderRadius = '10px';
+  iframe.loading = 'lazy';
+  
+  iframe.onload = function() {
+    placeholder.innerHTML = '';
+    placeholder.appendChild(iframe);
+  };
+  
+  iframe.onerror = function() {
+    placeholder.innerHTML = '<div style="text-align:center;color:#c0392b;padding-top:160px;">⚠️ 地图加载失败，<a href="' + src + '" target="_blank" style="color:#2980b9;">点此在新窗口打开</a></div>';
+  };
+
+  // Fallback: show after 5 seconds even if onload doesn't fire
+  setTimeout(function() {
+    if (placeholder.querySelector('.amap-embed')) return;
+    placeholder.innerHTML = '';
+    placeholder.appendChild(iframe);
+  }, 5000);
+}
+
+document.querySelectorAll('.map-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() { loadMap(btn); });
+  btn.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    loadMap(btn);
+  });
+});
+
+// Auto-load first visible map after 1 second (only for overview)
+setTimeout(function() {
+  var overviewMap = document.querySelector('#total-map .map-btn');
+  if (overviewMap && !overviewMap.classList.contains('loaded') && window.innerWidth > 768) {
+    // Only auto-load on desktop; on mobile, wait for click
+  }
+}, 1000);
+
+</script>
 </body>
 </html>
